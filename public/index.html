@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="uk" data-theme="dark">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Portfolio</title>
+    <meta name="description" content="Portfolio: projects and skills">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="top glass">
+        <a class="brand" href="#home">◈ <span id="brand-n"></span></a>
+        <nav class="links" id="links">
+            <a href="#about" data-i18n="nav.about"></a>
+            <a href="#projects" data-i18n="nav.projects"></a>
+            <a href="#skills" data-i18n="nav.skills"></a>
+            <a href="#contact" data-i18n="nav.contact"></a>
+        </nav>
+        <div class="pickers">
+            <button class="pk" id="lg-b" type="button" aria-haspopup="listbox"><span id="lg-v"></span></button>
+            <button class="pk" id="th-b" type="button" aria-haspopup="listbox"><span id="th-v"></span></button>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero wrap">
+            <div class="hero-t">
+                <p class="kick" data-i18n="hero.hi"></p>
+                <h1 id="h-name"></h1>
+                <p class="sub" data-i18n="hero.role"></p>
+                <div class="row">
+                    <a class="btn pri" href="#projects" data-i18n="hero.cta1"></a>
+                    <a class="btn" href="#contact" data-i18n="hero.cta2"></a>
+                </div>
+            </div>
+            <!-- put your photo into this folder as photo.jpg and it appears here automatically -->
+            <div class="photo glass" id="photo"><span></span></div>
+        </section>
+
+        <section id="about" class="wrap">
+            <h2 class="rv" data-i18n="about.title"></h2>
+            <div class="panel glass rv">
+                <p class="lead" data-i18n="about.text"></p>
+                <div class="facts" id="facts"></div>
+                <div class="row soc" id="soc-about"></div>
+            </div>
+        </section>
+
+        <section id="projects" class="wrap">
+            <h2 class="rv" data-i18n="proj.title"></h2>
+            <div class="cards" id="p-list"></div>
+        </section>
+
+        <section id="skills" class="wrap">
+            <h2 class="rv" data-i18n="sk.title"></h2>
+            <div id="s-list"></div>
+        </section>
+
+        <section id="contact" class="wrap">
+            <h2 class="rv" data-i18n="c.title"></h2>
+            <form class="panel glass rv" id="c-form" novalidate>
+                <p class="lead" data-i18n="c.sub"></p>
+                <div class="grid2">
+                    <div><label for="c-name" data-i18n="c.name"></label><input id="c-name" maxlength="100"
+                            autocomplete="name" required></div>
+                    <div><label for="c-email" data-i18n="c.email"></label><input id="c-email" type="email"
+                            maxlength="254" autocomplete="email" required></div>
+                </div>
+                <label for="c-text" data-i18n="c.msg"></label>
+                <textarea id="c-text" maxlength="3000" required></textarea>
+                <input class="hp" id="c-web" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+                <div class="row" style="margin-top:18px"><button class="btn pri" id="c-send"
+                        data-i18n="c.send"></button></div>
+            </form>
+        </section>
+    </main>
+
+    <footer class="foot wrap">
+        <div class="foot-grid">
+            <div>
+                <p>© <span id="yr"></span> <span id="foot-n"></span></p>
+                <div class="row soc" id="soc-foot"></div>
+            </div>
+            <form id="sub-f" class="sub-f" novalidate>
+                <b data-i18n="sub.title"></b>
+                <div class="row">
+                    <input id="sub-email" type="email" maxlength="254" data-ph="sub.ph" autocomplete="email" required>
+                    <button class="btn pri" data-i18n="sub.btn"></button>
+                </div>
+            </form>
+        </div>
+    </footer>
+
+    <div class="modal" id="modal" hidden>
+        <div class="modal-card glass" role="dialog" aria-modal="true" aria-labelledby="m-title">
+            <button class="m-x" id="m-x" type="button">×</button>
+            <div id="m-body"></div>
+        </div>
+    </div>
+    <div id="toast" role="status"></div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
