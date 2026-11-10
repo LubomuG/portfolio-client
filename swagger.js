@@ -63,6 +63,16 @@ module.exports = {
         },
       },
     },
+    "/portfolio-pdf": {
+      get: {
+        tags: ["Content"],
+        summary: "Get the portfolio PDF (stored in MongoDB GridFS)",
+        responses: {
+          200: { description: "PDF file" },
+          404: { description: "Not uploaded yet" },
+        },
+      },
+    },
     "/contact": {
       post: {
         tags: ["Forms"],

@@ -6,6 +6,7 @@ const PROFILE = {
   langs: ["uk", "en"], // languages you speak
   github: "https://github.com/LubomuG?tab=repositories",
   telegram: "https://t.me/LubomirGu",
+  pdf: "/api/portfolio-pdf", // PDF stored in MongoDB (upload it once with: node upload-pdf.js)
   photo: "photo.jpg", // put this file into the public folder, it shows up automatically
 };
 
@@ -28,6 +29,8 @@ const I18N = {
     "f.age": "Вік",
     "f.study": "Навчання",
     "f.langs": "Мови",
+    "f.pdf": "Портфоліо",
+    "f.pdfopen": "Відкрити PDF",
     "l.uk": "Українська",
     "l.en": "Англійська",
     "proj.title": "Проєкти",
@@ -76,6 +79,8 @@ const I18N = {
     "f.age": "Age",
     "f.study": "Studies",
     "f.langs": "Languages",
+    "f.pdf": "Portfolio",
+    "f.pdfopen": "Open PDF",
     "l.uk": "Ukrainian",
     "l.en": "English",
     "proj.title": "Projects",
@@ -124,6 +129,8 @@ const I18N = {
     "f.age": "Wiek",
     "f.study": "Nauka",
     "f.langs": "Języki",
+    "f.pdf": "Portfolio",
+    "f.pdfopen": "Otwórz PDF",
     "l.uk": "Ukraiński",
     "l.en": "Angielski",
     "proj.title": "Projekty",
@@ -172,6 +179,8 @@ const I18N = {
     "f.age": "Alter",
     "f.study": "Ausbildung",
     "f.langs": "Sprachen",
+    "f.pdf": "Portfolio",
+    "f.pdfopen": "PDF öffnen",
     "l.uk": "Ukrainisch",
     "l.en": "Englisch",
     "proj.title": "Projekte",
@@ -220,6 +229,8 @@ const I18N = {
     "f.age": "年龄",
     "f.study": "学习",
     "f.langs": "语言",
+    "f.pdf": "作品集",
+    "f.pdfopen": "打开 PDF",
     "l.uk": "乌克兰语",
     "l.en": "英语",
     "proj.title": "项目",
@@ -268,6 +279,8 @@ const I18N = {
     "f.age": "年齢",
     "f.study": "学校",
     "f.langs": "言語",
+    "f.pdf": "ポートフォリオ",
+    "f.pdfopen": "PDFを開く",
     "l.uk": "ウクライナ語",
     "l.en": "英語",
     "proj.title": "プロジェクト",
@@ -446,6 +459,11 @@ function renderAbout() {
         `<div class="fact"><small>${esc(k)}</small><b>${esc(v)}</b></div>`,
     )
     .join("");
+  // PDF portfolio card (file is stored in MongoDB, see upload-pdf.js)
+  $("#facts").insertAdjacentHTML(
+    "beforeend",
+    `<a class="fact fact-pdf" href="${PROFILE.pdf}" target="_blank" rel="noopener"><small>${esc(t("f.pdf"))}</small><b>📄 ${esc(t("f.pdfopen"))}</b></a>`,
+  );
   $("#soc-about").innerHTML = $("#soc-foot").innerHTML = socials();
   const sp = $("#photo span");
   if (sp)

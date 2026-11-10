@@ -80,10 +80,8 @@ const str = (v, max) =>
   String(v ?? "")
     .trim()
     .slice(0, max);
-const bucket = () =>
-  new mongoose.mongo.GridFSBucket(mongoose.connection.db, {
-    bucketName: "images",
-  });
+const bucket = (bucketName = "images") =>
+  new mongoose.mongo.GridFSBucket(mongoose.connection.db, { bucketName });
 
 /* ===================== APP ===================== */
 const app = express();
@@ -164,6 +162,30 @@ app.get(
     });
     bucket()
       .openDownloadStream(id)
+      .on("error", () => res.end())
+      .pipe(res);
+  }),
+);
+
+/* ---- portfolio PDF (stored in GridFS bucket "files" by upload-pdf.js) ---- */
+app.get(
+  "/api/portfolio-pdf",
+  wrap(async (req, res) => {
+    const [file] = await bucket("files")
+      .find({ filename: "portfolio.pdf" })
+      .sort({ uploadDate: -1 })
+      .limit(1)
+      .toArray();
+    if (!file) throw httpErr(404, "Not found");
+    res.set({
+      "Content-Type": "application/pdf",
+      "Content-Disposition": 'inline; filename="portfolio.pdf"',
+      "Content-Length": file.length,
+      "Cache-Control": "public, max-age=300",
+      "X-Content-Type-Options": "nosniff",
+    });
+    bucket("files")
+      .openDownloadStream(file._id)
       .on("error", () => res.end())
       .pipe(res);
   }),
